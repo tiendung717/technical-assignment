@@ -1,10 +1,10 @@
-package com.android.app.presentation.home
+package com.android.app.presentation.discover
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class DiscoverViewModel @Inject constructor() : ViewModel() {
 
 }

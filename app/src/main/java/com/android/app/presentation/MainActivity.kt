@@ -5,7 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.android.app.navigation.MainNavigation
+import com.android.app.presentation.root.RootScreen
 import com.android.designsystem.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             AppTheme {
-                MainNavigation()
+                RootScreen()
             }
         }
     }

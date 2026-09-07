@@ -5,6 +5,15 @@ import kotlinx.serialization.Serializable
 object NavScreen {
 
     @Serializable
-    data object Home
+    data object Discover
+
+    @Serializable
+    data object Notification
+
+    @Serializable
+    data object WatchList
+
+    @Serializable
+    data object MyTradeMe
 
 }
