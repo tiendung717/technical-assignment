@@ -4,10 +4,6 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-/**
- * Applies Hilt and KSP, then wires the Hilt runtime, the Compose navigation integration and the
- * annotation processor into any Android application or library module that requests it.
- */
 class HiltConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
@@ -17,7 +13,6 @@ class HiltConventionPlugin : Plugin<Project> {
                 apply("com.google.devtools.ksp")
             }
 
-            // Hilt only has an Android runtime, so wait for one of the Android plugins.
             pluginManager.withPlugin("com.android.library") {
                 addDependencies()
             }

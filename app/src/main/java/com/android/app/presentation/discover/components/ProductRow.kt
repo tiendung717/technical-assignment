@@ -14,8 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,12 +32,11 @@ import com.android.designsystem.LocalTradeMeColors
 @Composable
 fun ProductRow(
     modifier: Modifier = Modifier,
-    heightDp: Dp = 100.dp,
+    heightDp: Dp = 120.dp,
     imageUrl: String?,
     location: String,
     title: String,
     price: String,
-    isAuction: Boolean,
     isClassified: Boolean
 ) {
     Row(
@@ -47,7 +46,8 @@ fun ProductRow(
         AsyncImage(
             modifier = Modifier.size(heightDp),
             model = imageUrl,
-            contentDescription = "image_product"
+            contentDescription = "image_product",
+            contentScale = ContentScale.Crop
         )
 
         Column(
@@ -82,7 +82,7 @@ fun ProductRow(
 
                 Spacer(Modifier.weight(1f))
 
-                if (isAuction) {
+                if (!isClassified) {
                     Price(
                         amount = price,
                         text = "Buy Now",
@@ -146,7 +146,6 @@ private fun ProductRowAuctionPreview() {
             location = "Auckland City, Auckland",
             title = "Apple iPhone 15 Pro 256GB Natural Titanium",
             price = "$1,299",
-            isAuction = true,
             isClassified = false
         )
     }
@@ -162,7 +161,6 @@ private fun ProductRowClassifiedPreview() {
             location = "Christchurch, Canterbury",
             title = "Vintage Rimu Dining Table",
             price = "$450",
-            isAuction = false,
             isClassified = true
         )
     }
@@ -178,7 +176,6 @@ private fun ProductRowBothPreview() {
             location = "Wellington Central, Wellington",
             title = "Trek Marlin 7 Mountain Bike",
             price = "$899",
-            isAuction = true,
             isClassified = true
         )
     }
@@ -195,7 +192,6 @@ private fun ProductRowLongTitlePreview() {
             title = "Ercol Windsor Quaker Armchair in original fabric, fully restored, " +
                 "collection only from Hamilton",
             price = "$1,150",
-            isAuction = true,
             isClassified = false
         )
     }

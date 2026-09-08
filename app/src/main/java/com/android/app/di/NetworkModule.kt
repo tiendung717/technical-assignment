@@ -2,8 +2,8 @@ package com.android.app.di
 
 import com.android.app.BuildConfig
 import com.android.app.data.api.authenticator.TokenAuthenticator
-import com.android.app.data.api.interceptor.AuthenticationInterceptor
 import com.android.app.data.api.interceptor.LoggingInterceptor
+import com.android.app.data.api.interceptor.OAuthInterceptor
 import com.android.app.data.api.service.ApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -44,29 +44,32 @@ object NetworkModule {
     @Provides
     @Singleton
     @AuthQualifier
-    fun provideAuthenticationInterceptor(): Interceptor {
-        return AuthenticationInterceptor {
-            "" // Replace with actual token retrieval logic
-        }
+    fun provideOAuthInterceptor(): Interceptor {
+        return OAuthInterceptor(
+            consumerKey = BuildConfig.CONSUMER_KEY,
+            consumerSecret = BuildConfig.CONSUMER_SECRET
+        )
     }
 
     @Provides
     @Singleton
     fun provideAuthenticator(): Authenticator {
         return TokenAuthenticator {
-            "" // Replace with actual token refresh logic
+            ""
         }
     }
 
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        @LoggingQualifier loggingInterceptor: Interceptor
+        @LoggingQualifier loggingInterceptor: Interceptor,
+        @AuthQualifier authInterceptor: Interceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .addInterceptor(authInterceptor)
             .apply {
                 if (BuildConfig.DEBUG) {
                     addInterceptor(loggingInterceptor)

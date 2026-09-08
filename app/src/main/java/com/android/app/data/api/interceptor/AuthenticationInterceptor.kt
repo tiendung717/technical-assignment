@@ -3,12 +3,6 @@ package com.android.app.data.api.interceptor
 import okhttp3.Interceptor
 import okhttp3.Response
 
-/**
- * Interceptor that adds authentication headers to HTTP requests.
- *
- * @param tokenProvider A function that provides the current authentication token.
- *                      Returns null if no token is available.
- */
 class AuthenticationInterceptor(
     private val tokenProvider: () -> String?
 ) : Interceptor {
@@ -28,4 +22,3 @@ class AuthenticationInterceptor(
         return chain.proceed(request)
     }
 }
-

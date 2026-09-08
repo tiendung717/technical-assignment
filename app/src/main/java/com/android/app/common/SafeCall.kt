@@ -25,4 +25,3 @@ suspend fun <T> safeCall(block: suspend () -> T): ResultState<T> {
         ResultState.Failure(throwable)
     }
 }
-

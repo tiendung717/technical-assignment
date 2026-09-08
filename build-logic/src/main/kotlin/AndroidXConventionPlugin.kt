@@ -14,7 +14,6 @@ class AndroidXConventionPlugin : Plugin<Project> {
             addDependencies(project)
         }
 
-        // Log a message indicating that the plugin has been applied
         project.logger.lifecycle("✅ AndroidXConventionPlugin: AndroidX dependencies added")
 
     }

@@ -4,11 +4,6 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-/**
- * Wires Retrofit, OkHttp and the kotlinx-serialization converter into any Android application or
- * library module that requests it. Also applies the serialization plugin so response models can be
- * annotated with `@Serializable`.
- */
 class RetrofitConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {

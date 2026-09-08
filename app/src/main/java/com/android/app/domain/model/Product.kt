@@ -5,6 +5,5 @@ data class Product(
     val location: String,
     val title: String,
     val price: String,
-    val isAuction: Boolean,
     val isClassified: Boolean
 )

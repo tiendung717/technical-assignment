@@ -48,9 +48,7 @@ fun RootScreen(
         HorizontalDivider()
 
         BottomNavBar(
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding(),
+            modifier = Modifier.fillMaxWidth(),
             items = viewModel.navItems,
             current = viewModel.navItemFor(selectedTab),
             onItemClicked = { item ->
