@@ -9,16 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -36,6 +32,7 @@ import com.android.designsystem.LocalTradeMeColors
 import com.android.designsystem.components.EmptyView
 import com.android.designsystem.components.ErrorView
 import com.android.designsystem.components.LoadingView
+import com.android.designsystem.components.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,27 +55,28 @@ fun HomeScreen(
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
+        containerColor = LocalTradeMeColors.current.background,
         topBar = {
-            TopAppBar(
-                title = { Text(text = stringResource(R.string.discover_title)) },
-                actions = {
-                    IconButton(onClick = { viewModel.onSearchClicked() }) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_search),
-                            contentDescription = stringResource(R.string.discover_action_search)
-                        )
-                    }
-                    IconButton(onClick = { viewModel.onCartClicked() }) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_cart),
-                            contentDescription = stringResource(R.string.discover_action_cart)
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    actionIconContentColor = LocalTradeMeColors.current.tasman
+            Column {
+                TopBar(
+                    title = stringResource(R.string.discover_title),
+                    actions = {
+                        IconButton(onClick = { viewModel.onSearchClicked() }) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_search),
+                                contentDescription = stringResource(R.string.discover_action_search)
+                            )
+                        }
+                        IconButton(onClick = { viewModel.onCartClicked() }) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_cart),
+                                contentDescription = stringResource(R.string.discover_action_cart)
+                            )
+                        }
+                    },
                 )
-            )
+                HorizontalDivider()
+            }
         }
     ) { contentPadding ->
         Box(

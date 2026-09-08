@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.android.app.R
+import com.android.designsystem.LocalTradeMeColors
 
 @Composable
 fun WatchListScreen(
@@ -17,6 +18,9 @@ fun WatchListScreen(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = stringResource(R.string.bottom_nav_watchlist))
+        Text(
+            text = stringResource(R.string.bottom_nav_watchlist),
+            color = LocalTradeMeColors.current.textDark
+        )
     }
 }

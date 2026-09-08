@@ -37,8 +37,8 @@ data class BottomNavBarProps(
 object BottomNavBarDefaults {
     @Composable
     fun properties(
-        containerColor: Color = MaterialTheme.colorScheme.surface,
-        contentColor: Color = MaterialTheme.colorScheme.onSurface,
+        containerColor: Color = LocalTradeMeColors.current.background,
+        contentColor: Color = LocalTradeMeColors.current.textLight,
         selectedContentColor: Color = LocalTradeMeColors.current.tasman
     ) = BottomNavBarProps(
         containerColor = containerColor,

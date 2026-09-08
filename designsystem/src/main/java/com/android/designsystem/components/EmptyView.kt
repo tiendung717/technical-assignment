@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.designsystem.AppTheme
+import com.android.designsystem.LocalTradeMeColors
 
 @Composable
 fun EmptyView(
@@ -36,7 +37,7 @@ fun EmptyView(
             Icon(
                 imageVector = it,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                tint = LocalTradeMeColors.current.textDark,
                 modifier = Modifier.size(48.dp),
             )
         }
@@ -44,13 +45,14 @@ fun EmptyView(
             Text(
                 text = it,
                 style = MaterialTheme.typography.titleMedium,
+                color = LocalTradeMeColors.current.textDark,
                 textAlign = TextAlign.Center,
             )
         }
         Text(
             text = message,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = LocalTradeMeColors.current.textLight,
             textAlign = TextAlign.Center,
         )
     }

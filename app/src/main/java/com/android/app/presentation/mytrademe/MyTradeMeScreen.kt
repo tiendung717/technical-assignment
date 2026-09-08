@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.android.app.R
+import com.android.designsystem.LocalTradeMeColors
 
 @Composable
 fun MyTradeMeScreen(
@@ -17,6 +18,9 @@ fun MyTradeMeScreen(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = stringResource(R.string.bottom_nav_my_trademe))
+        Text(
+            text = stringResource(R.string.bottom_nav_my_trademe),
+            color = LocalTradeMeColors.current.textDark
+        )
     }
 }

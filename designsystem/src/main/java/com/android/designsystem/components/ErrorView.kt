@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.android.designsystem.AppTheme
+import com.android.designsystem.LocalTradeMeColors
 import com.android.designsystem.R
 
 @Composable
@@ -39,13 +40,14 @@ fun ErrorView(
             Icon(
                 imageVector = Icons.Outlined.ErrorOutline,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.error,
+                tint = LocalTradeMeColors.current.textDark,
                 modifier = Modifier.size(48.dp),
             )
         }
         Text(
             text = message,
             style = MaterialTheme.typography.bodyMedium,
+            color = LocalTradeMeColors.current.textDark,
             textAlign = TextAlign.Center,
         )
         onRetry?.let {

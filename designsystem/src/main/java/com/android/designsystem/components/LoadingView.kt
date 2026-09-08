@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.designsystem.AppTheme
+import com.android.designsystem.LocalTradeMeColors
 
 @Composable
 fun LoadingView(modifier: Modifier = Modifier) {
@@ -19,8 +20,9 @@ fun LoadingView(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.size(24.dp),
-            strokeWidth = 4.dp
+            modifier = Modifier.size(32.dp),
+            strokeWidth = 4.dp,
+            color = LocalTradeMeColors.current.tasman
         )
     }
 }

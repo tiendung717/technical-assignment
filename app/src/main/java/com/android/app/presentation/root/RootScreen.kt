@@ -1,9 +1,9 @@
 package com.android.app.presentation.root
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,6 +17,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.android.app.navigation.MainNavigation
+import com.android.designsystem.LocalTradeMeColors
 import com.android.designsystem.components.BottomNavBar
 
 @Composable
@@ -38,7 +39,9 @@ fun RootScreen(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(LocalTradeMeColors.current.background)
     ) {
         MainNavigation(
             modifier = Modifier.weight(1f),

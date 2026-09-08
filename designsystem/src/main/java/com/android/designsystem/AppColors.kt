@@ -9,13 +9,15 @@ data class TradeMeColors(
     val tasman: Color,
     val feijoa: Color,
     val textDark: Color,
-    val textLight: Color
+    val textLight: Color,
+    val background: Color
 )
 
-val tradeColors = TradeMeColors(
+val tradeMeColors = TradeMeColors(
     tasman = Color(0xFF148FE2),
     feijoa = Color(0xFF29A754),
     textDark = Color(0xFF393531),
-    textLight = Color(0xFF85807B)
+    textLight = Color(0xFF85807B),
+    background = Color(0xFFFFFFFF)
 )
-val LocalTradeMeColors = staticCompositionLocalOf { tradeColors }
+val LocalTradeMeColors = staticCompositionLocalOf { tradeMeColors }

@@ -9,7 +9,7 @@ fun AppTheme(
     content: @Composable () -> Unit
 ) {
     CompositionLocalProvider(
-        LocalTradeMeColors provides tradeColors
+        LocalTradeMeColors provides tradeMeColors
     ) {
         MaterialTheme(
             content = content
