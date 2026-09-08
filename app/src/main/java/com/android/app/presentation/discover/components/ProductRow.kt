@@ -23,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.android.app.R
-import com.android.app.domain.model.ReserveState
 import coil3.ColorImage
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.AsyncImage
@@ -41,7 +40,7 @@ fun ProductRow(
     title: String,
     price: String,
     buyNowPrice: String?,
-    reserveState: ReserveState
+    isReserveMet: Boolean?
 ) {
     Row(
         modifier = modifier,
@@ -79,7 +78,7 @@ fun ProductRow(
             ) {
                 Price(
                     amount = price,
-                    text = reserveState.label()
+                    text = reserveLabel(isReserveMet)
                 )
 
                 Spacer(Modifier.weight(1f))
@@ -101,7 +100,7 @@ internal fun Price(
     modifier: Modifier = Modifier,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     amount: String,
-    text: String?
+    text: String? = null
 ) {
     Column(
         modifier = modifier,
@@ -125,14 +124,14 @@ internal fun Price(
 }
 
 @Composable
-private fun ReserveState.label(): String? {
-    return when (this) {
-        ReserveState.NONE -> stringResource(R.string.product_no_reserve)
-        ReserveState.MET -> stringResource(R.string.product_reserve_met)
-        ReserveState.NOT_MET -> stringResource(R.string.product_reserve_not_met)
-        ReserveState.NOT_APPLICABLE -> null
+private fun reserveLabel(isReserveMet: Boolean?): String? {
+    return when (isReserveMet) {
+        true -> stringResource(R.string.product_reserve_met)
+        false -> stringResource(R.string.product_no_reserve)
+        null -> null
     }
 }
+
 @OptIn(ExperimentalCoilApi::class)
 private val previewImageHandler = AsyncImagePreviewHandler { _ ->
     ColorImage(color = 0xFFB0BEC5.toInt())
@@ -161,7 +160,7 @@ private fun ProductRowAuctionPreview() {
             title = "Apple iPhone 15 Pro 256GB Natural Titanium",
             price = "$1,299",
             buyNowPrice = "$1,499",
-            reserveState = ReserveState.MET
+            isReserveMet = true
         )
     }
 }
@@ -177,7 +176,7 @@ private fun ProductRowClassifiedPreview() {
             title = "Vintage Rimu Dining Table",
             price = "$450",
             buyNowPrice = null,
-            reserveState = ReserveState.NOT_APPLICABLE
+            isReserveMet = null
         )
     }
 }
@@ -193,7 +192,7 @@ private fun ProductRowBothPreview() {
             title = "Trek Marlin 7 Mountain Bike",
             price = "$899",
             buyNowPrice = "$950",
-            reserveState = ReserveState.NONE
+            isReserveMet = false
         )
     }
 }
@@ -210,7 +209,7 @@ private fun ProductRowLongTitlePreview() {
                 "collection only from Hamilton",
             price = "$1,150",
             buyNowPrice = null,
-            reserveState = ReserveState.NOT_MET
+            isReserveMet = true
         )
     }
 }

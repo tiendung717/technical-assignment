@@ -121,7 +121,7 @@ fun HomeScreen(
                                     title = product.title,
                                     price = product.price,
                                     buyNowPrice = product.buyNowPrice,
-                                    reserveState = product.reserveState
+                                    isReserveMet = product.isReserveMet
                                 )
 
                                 if (index < items.lastIndex) {

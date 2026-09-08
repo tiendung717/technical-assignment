@@ -30,8 +30,8 @@ data class ListingResponse(
     @SerialName("BuyNowPrice")
     val buyNowPrice: Double? = null,
 
-    @SerialName("ReserveState")
-    val reserveState: Int? = null,
+    @SerialName("IsReserveMet")
+    val isReserveMet: Boolean? = null,
 
     @SerialName("IsClassified")
     val isClassified: Boolean? = null,
