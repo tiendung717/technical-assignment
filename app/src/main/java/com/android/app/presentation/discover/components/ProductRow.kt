@@ -53,7 +53,7 @@ fun ProductRow(
                 .background(LocalTradeMeColors.current.placeholder),
             model = imageUrl,
             contentDescription = stringResource(R.string.product_image),
-            contentScale = ContentScale.Inside
+            contentScale = ContentScale.Crop
         )
 
         Column(
