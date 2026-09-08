@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.android.app.presentation.discover.HomeScreen
 import com.android.app.presentation.mytrademe.MyTradeMeScreen
-import com.android.app.presentation.notification.NotificationScreen
 import com.android.app.presentation.watchlist.WatchListScreen
 
 @Composable
@@ -23,10 +22,6 @@ fun MainNavigation(
     ) {
         composable<NavScreen.Discover> {
             HomeScreen()
-        }
-
-        composable<NavScreen.Notification> {
-            NotificationScreen()
         }
 
         composable<NavScreen.WatchList> {

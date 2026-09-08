@@ -62,8 +62,8 @@ class RootViewModelTest {
 
     @Test
     fun onTabDisplayed_updatesSelectionWithoutAClick() {
-        viewModel.onTabDisplayed(BottomTab.NOTIFICATION)
+        viewModel.onTabDisplayed(BottomTab.WATCH_LIST)
 
-        assertEquals(BottomTab.NOTIFICATION, viewModel.selectedTab.value)
+        assertEquals(BottomTab.WATCH_LIST, viewModel.selectedTab.value)
     }
 }

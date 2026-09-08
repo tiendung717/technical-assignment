@@ -8,9 +8,6 @@ object NavScreen {
     data object Discover
 
     @Serializable
-    data object Notification
-
-    @Serializable
     data object WatchList
 
     @Serializable
