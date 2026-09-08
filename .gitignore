@@ -84,7 +84,9 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-keystore.properties
+# Debug signing config is committed so the project builds with no extra setup.
+# Real release keystores must stay out of the repo.
 *.jks
+!debug.jks
 
 .idea/
