@@ -11,7 +11,7 @@ enum class BottomTab(
     @param:DrawableRes val icon: Int
 ) {
     DISCOVER(NavScreen.Discover, R.string.bottom_nav_discover, R.drawable.ic_search),
-    NOTIFICATION(NavScreen.Notification, R.string.bottom_nav_notification, R.drawable.ic_notification),
+    NOTIFICATION(NavScreen.Notification, R.string.bottom_nav_notification, R.drawable.ic_cart),
     WATCH_LIST(NavScreen.WatchList, R.string.bottom_nav_watchlist, R.drawable.ic_watchlist),
     MY_TRADE_ME(NavScreen.MyTradeMe, R.string.bottom_nav_my_trademe, R.drawable.ic_my_trademe),
 }
