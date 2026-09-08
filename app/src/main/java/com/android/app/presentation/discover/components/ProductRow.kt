@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.android.app.R
+import com.android.app.domain.model.ReserveState
 import coil3.ColorImage
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.AsyncImage
@@ -39,7 +40,8 @@ fun ProductRow(
     location: String,
     title: String,
     price: String,
-    isClassified: Boolean
+    buyNowPrice: String?,
+    reserveState: ReserveState
 ) {
     Row(
         modifier = modifier,
@@ -75,18 +77,16 @@ fun ProductRow(
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                if (isClassified) {
-                    Price(
-                        amount = price,
-                        text = stringResource(R.string.product_no_reserve)
-                    )
-                }
+                Price(
+                    amount = price,
+                    text = reserveState.label()
+                )
 
                 Spacer(Modifier.weight(1f))
 
-                if (!isClassified) {
+                if (buyNowPrice != null) {
                     Price(
-                        amount = price,
+                        amount = buyNowPrice,
                         text = stringResource(R.string.product_buy_now),
                         horizontalAlignment = Alignment.End
                     )
@@ -101,7 +101,7 @@ internal fun Price(
     modifier: Modifier = Modifier,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     amount: String,
-    text: String
+    text: String?
 ) {
     Column(
         modifier = modifier,
@@ -114,11 +114,23 @@ internal fun Price(
             color = LocalTradeMeColors.current.textDark
         )
 
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyMedium,
-            color = LocalTradeMeColors.current.textLight
-        )
+        if (text != null) {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyMedium,
+                color = LocalTradeMeColors.current.textLight
+            )
+        }
+    }
+}
+
+@Composable
+private fun ReserveState.label(): String? {
+    return when (this) {
+        ReserveState.NONE -> stringResource(R.string.product_no_reserve)
+        ReserveState.MET -> stringResource(R.string.product_reserve_met)
+        ReserveState.NOT_MET -> stringResource(R.string.product_reserve_not_met)
+        ReserveState.NOT_APPLICABLE -> null
     }
 }
 @OptIn(ExperimentalCoilApi::class)
@@ -148,7 +160,8 @@ private fun ProductRowAuctionPreview() {
             location = "Auckland City, Auckland",
             title = "Apple iPhone 15 Pro 256GB Natural Titanium",
             price = "$1,299",
-            isClassified = false
+            buyNowPrice = "$1,499",
+            reserveState = ReserveState.MET
         )
     }
 }
@@ -163,7 +176,8 @@ private fun ProductRowClassifiedPreview() {
             location = "Christchurch, Canterbury",
             title = "Vintage Rimu Dining Table",
             price = "$450",
-            isClassified = true
+            buyNowPrice = null,
+            reserveState = ReserveState.NOT_APPLICABLE
         )
     }
 }
@@ -178,7 +192,8 @@ private fun ProductRowBothPreview() {
             location = "Wellington Central, Wellington",
             title = "Trek Marlin 7 Mountain Bike",
             price = "$899",
-            isClassified = true
+            buyNowPrice = "$950",
+            reserveState = ReserveState.NONE
         )
     }
 }
@@ -194,7 +209,8 @@ private fun ProductRowLongTitlePreview() {
             title = "Ercol Windsor Quaker Armchair in original fabric, fully restored, " +
                 "collection only from Hamilton",
             price = "$1,150",
-            isClassified = false
+            buyNowPrice = null,
+            reserveState = ReserveState.NOT_MET
         )
     }
 }

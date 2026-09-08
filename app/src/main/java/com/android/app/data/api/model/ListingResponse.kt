@@ -27,6 +27,12 @@ data class ListingResponse(
     @SerialName("PhotoUrls")
     val photoUrls: List<String>? = null,
 
+    @SerialName("BuyNowPrice")
+    val buyNowPrice: Double? = null,
+
+    @SerialName("ReserveState")
+    val reserveState: Int? = null,
+
     @SerialName("IsClassified")
     val isClassified: Boolean? = null,
 )

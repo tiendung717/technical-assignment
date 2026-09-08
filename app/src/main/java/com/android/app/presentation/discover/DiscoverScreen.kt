@@ -120,7 +120,8 @@ fun HomeScreen(
                                     location = product.location,
                                     title = product.title,
                                     price = product.price,
-                                    isClassified = product.isClassified
+                                    buyNowPrice = product.buyNowPrice,
+                                    reserveState = product.reserveState
                                 )
 
                                 if (index < items.lastIndex) {
