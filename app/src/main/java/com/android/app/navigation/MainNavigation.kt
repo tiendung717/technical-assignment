@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.android.app.presentation.discover.HomeScreen
+import com.android.app.presentation.discover.DiscoverScreen
 import com.android.app.presentation.mytrademe.MyTradeMeScreen
 import com.android.app.presentation.watchlist.WatchListScreen
 
@@ -21,7 +21,7 @@ fun MainNavigation(
         startDestination = NavScreen.Discover,
     ) {
         composable<NavScreen.Discover> {
-            HomeScreen()
+            DiscoverScreen()
         }
 
         composable<NavScreen.WatchList> {

@@ -36,7 +36,7 @@ import com.android.designsystem.components.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun DiscoverScreen(
     modifier: Modifier = Modifier,
     viewModel: DiscoverViewModel = hiltViewModel()
 ) {
