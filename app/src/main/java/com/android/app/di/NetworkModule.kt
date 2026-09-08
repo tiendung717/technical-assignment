@@ -1,7 +1,6 @@
 package com.android.app.di
 
 import com.android.app.BuildConfig
-import com.android.app.data.api.authenticator.TokenAuthenticator
 import com.android.app.data.api.interceptor.LoggingInterceptor
 import com.android.app.data.api.interceptor.OAuthInterceptor
 import com.android.app.data.api.service.ApiService
@@ -11,7 +10,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
-import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -49,14 +47,6 @@ object NetworkModule {
             consumerKey = BuildConfig.CONSUMER_KEY,
             consumerSecret = BuildConfig.CONSUMER_SECRET
         )
-    }
-
-    @Provides
-    @Singleton
-    fun provideAuthenticator(): Authenticator {
-        return TokenAuthenticator {
-            ""
-        }
     }
 
     @Provides
