@@ -17,15 +17,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.android.designsystem.AppTheme
+import com.android.designsystem.R
 
 @Composable
 fun ErrorView(
     message: String,
     modifier: Modifier = Modifier,
     onRetry: (() -> Unit)? = null,
-    retryLabel: String = "Retry",
+    retryLabel: String = stringResource(R.string.error_retry),
     showIcon: Boolean = true,
 ) {
     Column(

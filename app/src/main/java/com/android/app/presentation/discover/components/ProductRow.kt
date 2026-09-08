@@ -17,10 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.android.app.R
 import coil3.ColorImage
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.AsyncImage
@@ -46,7 +48,7 @@ fun ProductRow(
         AsyncImage(
             modifier = Modifier.size(heightDp),
             model = imageUrl,
-            contentDescription = "image_product",
+            contentDescription = stringResource(R.string.product_image),
             contentScale = ContentScale.Crop
         )
 
@@ -76,7 +78,7 @@ fun ProductRow(
                 if (isClassified) {
                     Price(
                         amount = price,
-                        text = "No reverse"
+                        text = stringResource(R.string.product_no_reserve)
                     )
                 }
 
@@ -85,7 +87,7 @@ fun ProductRow(
                 if (!isClassified) {
                     Price(
                         amount = price,
-                        text = "Buy Now",
+                        text = stringResource(R.string.product_buy_now),
                         horizontalAlignment = Alignment.End
                     )
                 }

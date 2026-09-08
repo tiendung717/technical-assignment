@@ -1,5 +1,6 @@
 package com.android.app.presentation.discover
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,15 +20,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.app.R
-import com.android.app.common.ResultState
 import com.android.app.presentation.discover.components.ProductRow
 import com.android.designsystem.LocalTradeMeColors
 import com.android.designsystem.components.EmptyView
@@ -40,24 +43,35 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: DiscoverViewModel = hiltViewModel()
 ) {
-    val products by viewModel.products.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.uiEvent.collect { event ->
+            val message = when (event) {
+                DiscoverUiEvent.SearchClicked -> R.string.discover_search_clicked
+                DiscoverUiEvent.CartClicked -> R.string.discover_cart_clicked
+            }
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Browse") },
+                title = { Text(text = stringResource(R.string.discover_title)) },
                 actions = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = { viewModel.onSearchClicked() }) {
                         Icon(
                             painter = painterResource(R.drawable.ic_search),
-                            contentDescription = "search"
+                            contentDescription = stringResource(R.string.discover_action_search)
                         )
                     }
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = { viewModel.onCartClicked() }) {
                         Icon(
                             painter = painterResource(R.drawable.ic_cart),
-                            contentDescription = "cart"
+                            contentDescription = stringResource(R.string.discover_action_cart)
                         )
                     }
                 },
@@ -73,44 +87,44 @@ fun HomeScreen(
                 .padding(top = contentPadding.calculateTopPadding()),
             contentAlignment = Alignment.Center
         ) {
-            when (val state = products) {
-                is ResultState.Idle, is ResultState.Loading -> {
+            when (val state = uiState) {
+                is DiscoverUiState.Loading -> {
                     LoadingView()
                 }
 
-                is ResultState.Failure -> {
+                is DiscoverUiState.Error -> {
                     ErrorView(
-                        message = "We could not load the latest listings.",
+                        message = stringResource(R.string.discover_error),
                         onRetry = { viewModel.loadProducts() }
                     )
                 }
 
-                is ResultState.Success -> {
-                    val items = state.data
-                    if (items.isEmpty()) {
-                        EmptyView(message = "No listings right now.")
-                    } else {
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(vertical = 16.dp, horizontal = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            itemsIndexed(items) { index, product ->
-                                Column(
-                                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                                ) {
-                                    ProductRow(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        imageUrl = product.imageUrl,
-                                        location = product.location,
-                                        title = product.title,
-                                        price = product.price,
-                                        isClassified = product.isClassified
-                                    )
+                is DiscoverUiState.Empty -> {
+                    EmptyView(message = stringResource(R.string.discover_empty))
+                }
 
-                                    if (index < items.lastIndex) {
-                                        HorizontalDivider()
-                                    }
+                is DiscoverUiState.Products -> {
+                    val items = state.items
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(vertical = 16.dp, horizontal = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        itemsIndexed(items) { index, product ->
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                ProductRow(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    imageUrl = product.imageUrl,
+                                    location = product.location,
+                                    title = product.title,
+                                    price = product.price,
+                                    isClassified = product.isClassified
+                                )
+
+                                if (index < items.lastIndex) {
+                                    HorizontalDivider()
                                 }
                             }
                         }

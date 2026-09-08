@@ -5,4 +5,16 @@
     <string name="bottom_nav_notification">Notification</string>
     <string name="bottom_nav_watchlist">WatchList</string>
     <string name="bottom_nav_my_trademe">My TradeMe</string>
+
+    <string name="discover_title">Browse</string>
+    <string name="discover_action_search">Search</string>
+    <string name="discover_action_cart">Cart</string>
+    <string name="discover_error">We could not load the latest listings.</string>
+    <string name="discover_empty">No listings right now.</string>
+    <string name="discover_search_clicked">Search coming soon</string>
+    <string name="discover_cart_clicked">Cart coming soon</string>
+
+    <string name="product_image">Product image</string>
+    <string name="product_no_reserve">No reverse</string>
+    <string name="product_buy_now">Buy Now</string>
 </resources>
