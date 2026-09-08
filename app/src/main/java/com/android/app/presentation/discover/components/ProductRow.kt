@@ -1,5 +1,6 @@
 package com.android.app.presentation.discover.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -47,7 +48,9 @@ fun ProductRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         AsyncImage(
-            modifier = Modifier.size(heightDp),
+            modifier = Modifier
+                .size(heightDp)
+                .background(LocalTradeMeColors.current.placeholder),
             model = imageUrl,
             contentDescription = stringResource(R.string.product_image),
             contentScale = ContentScale.Crop

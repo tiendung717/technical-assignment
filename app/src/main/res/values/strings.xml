@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TradeMe Test</string>
 
-    <string name="bottom_nav_discover">Discover</string>
+    <string name="bottom_nav_discover">Last listing</string>
     <string name="bottom_nav_watchlist">WatchList</string>
     <string name="bottom_nav_my_trademe">My TradeMe</string>
 
